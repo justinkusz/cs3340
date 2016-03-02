@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="style.xsl" ?>
+
+<podcasts>
+  <podcast>
+    <name>Good Job Brain!</name>
+    <genre>Humor/Trivia</genre>
+    <url>http://www.goodjobbrain.com/</url>
+    <about>
+      We are Karen, Colin, Dana, and Chris. We love pub trivia, breakfast cereal, portmanteau words, and animal facts!
+
+      This project started as a Kickstarter initiative back in December 2011, and we just want to share our love of trivia with others by making this podcast. We here are nuts about trivia. And we know there are people out there who share our unusual obsession.
+    </about>
+  </podcast>
+  <podcast>
+    <name>Bad Voltage</name>
+    <genre>Technology</genre>
+    <url>http://www.badvoltage.org/</url>
+    <about>
+      Bad Voltage is a podcast with Jono Bacon, Jeremy Garcia, Stuart Langridge, and Bryan Lunduke, in which they talk about anything that interests them. Technology, Open Source, Politics, Music…anything and everything is up for grabs, complete with reviews and interviews.
+    </about>
+  </podcast>
+  <podcast>
+    <name>Big Picture Science</name>
+    <genre>Science</genre>
+    <url>http://www.bigpicturescience.org/</url>
+    <about>
+      The Big Picture Science radio show and podcast engages the public with modern science research through lively and intelligent storytelling. Science radio doesn’t have to be dull. The only dry thing about our program is the humor.
+
+      Big Picture Science takes on big questions by interviewing leading researchers and weaving together their stories of discovery in a clever and off-kilter narrative style.
+    </about>
+  </podcast>
+  <podcast>
+    <name>Radiolab</name>
+    <genre>Science/Culture/Philosophy</genre>
+    <url>http://www.radiolab.org/</url>
+    <about>
+      Radiolab is a show about curiosity. Where sound illuminates ideas, and the boundaries blur between science, philosophy, and human experience.
+
+      Radiolab is heard around the country on more than 500 member stations.
+    </about>
+  </podcast>
+  <podcast>
+    <name>Intelligence Squared</name>
+    <genre>Debate/Politics</genre>
+    <url>http://www.intelligencesquaredus.org/</url>
+    <about>
+      Based on the highly successful Oxford debate program in London, Intelligence Squared, Intelligence Squared U.S. brings together the world’s leading authorities on the day’s most important issues.
+    </about>
+  </podcast>
+  <podcast>
+    <name>This American Life</name>
+    <genre>Variety/Art/Culture</genre>
+    <url>http://www.thisamericanlife.org/</url>
+    <about>
+      This American Life is a weekly public radio show broadcast on more than 500 stations to about 2.2 million listeners. It is produced in collaboration with Chicago Public Media, delivered to stations by PRX The Public Radio Exchange, and has won all of the major broadcasting awards. It is also often the most popular podcast in the country, with another 2 million people downloading each episode.
+    </about>
+  </podcast>
+</podcasts>

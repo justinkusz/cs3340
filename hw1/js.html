@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>JavaScript Example</title>
+    <style>
+        body {
+            font-family:Verdana; 
+        }
+        th {
+            text-align:left;
+        }
+    </style>
+</head>
+<body>
+    <p style="font-weight:bold"><a href="../default.html">Home</a> > <a href="default.html">HW 1</a> > JavaScript Example</p>
+    <h1>Book Order Form</h1>
+    <form>
+        <table>
+            <col width="150" />
+            
+            <tr>
+                <th>Select Books and/or Supply Book title and price</th>
+                <td>
+                <select id="bookList" multiple>
+                    <option value="20">Walden Pond</option>
+                    <option value="15">Zen and the Art...</option>
+                    <option value="8">The Razor's Edge</option>
+                    <option value="15">The Poisonwood Bible</option>
+                    <option value="10">Wuthering Heights</option>
+                </select>
+                </td>
+            </tr>
+            <tr>
+                <th></th><td>Book <input id="book" type="text" /> Price <input id="price" type="text"</td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <th>Options</th>
+                <td><input type="checkbox" name="options" value="rush" />Rush Order <input type="checkbox" name="options" value="gift" />Gift Wrap</td>
+            </tr>
+            <tr>
+                <th>Customer Type</th>
+                <td><input type="radio" name="customer" value="General" checked /> General <input type="radio" name="customer" value="Government" /> Government</td>
+            </tr>
+            <tr>
+                <th>Ship To</th>
+                <td>
+                    <select id="shipping">
+                        <option value="5">NY</option>
+                        <option value="7">CA</option>
+                        <option value="3">SC</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th></th><td>Purchase Details:</td>
+            </tr>
+            <tr>
+                <th><input type="button" onclick="complete()" value="Purchase" /></th>
+                <td><textarea id="details" cols="55" rows="8"></textarea></td>
+            </tr>
+        </table>
+    </form>
+    <script type="text/javascript">
+        
+        function complete() {
+            var subtotal = 0;
+            var bookList = document.getElementById("bookList");
+            var details = document.getElementById("details");
+            var printout = "";
+            var i;
+            var book;
+            var price;
+            var discount;
+            details.value = "";
+            for(i=0;i<bookList.length;i++)
+            {
+                if(bookList[i].selected)
+                {
+                    book = bookList[i];
+                    subtotal += parseInt(book.value);
+                    printout += "$" + book.value + ".00 - " + book.text + '\n';
+                }
+            }
+            book = document.getElementById("book");
+            price = document.getElementById("price");
+            if((book.value != "") && (price.value != ""))
+            {
+                printout += "$" + price.value + " - " + book.value + '\n';
+            }
+            var customer = document.getElementsByName("customer");
+            for (i = 0; i < customer.length; i++)
+            {
+                if(customer[i].checked)
+                {
+                    printout += customer[i].value + " Customer" + '\n';
+                    if (customer[i].value == "Government") {
+                        discount = 0.1;
+                    }
+                    else
+                        discount = 0.0;
+                }
+            }
+            var option = document.getElementsByName("options");
+            for(i=0; i < option.length; i++)
+            {
+                var optionName;
+                var optionCost;
+                if(option[i].checked)
+                {
+                    if (option[i].value == "rush")
+                    {
+                        optionName = "Rush Order";
+                        optionCost = 10;
+                    }
+                    else if (option[i].value == "gift")
+                    {
+                        optionName = "Gift Wrap";
+                        optionCost = 5;
+                    }
+                    subtotal += optionCost;
+                    printout += "$" + optionCost + ".00 - " + optionName + '\n';
+                }
+            }
+            var shipping = document.getElementById("shipping");
+            var shippingCost;
+            var shippingState;
+            for (i = 0; i < shipping.length; i++)
+            {
+                if(shipping[i].selected)
+                {
+                    shippingCost = parseInt(shipping[i].value);
+                    shippingState = shipping[i].text;
+                    subtotal += shippingCost;
+                    printout += "$" + shippingCost + ".00 - Ship to " + shippingState + '\n';
+                }
+            }
+            printout += "-------------------- \n";
+            printout += "Sub Total: $" + subtotal + ".00\n";
+            printout += "Discount (" + (discount * 100) + "%): $" + (subtotal * discount) + "\n";
+            subtotal -= (subtotal * discount);
+            printout += "Total: $" + subtotal + "\n";
+            details.value = printout;
+
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>JavaScript Example</title>
+    <style>
+        body {
+            font-family:Verdana; 
+        }
+        th {
+            text-align:left;
+        }
+    </style>
+    <script src="jquery-1.11.2.js"></script>
+</head>
+<body>
+    <p style="font-weight:bold"><a href="../default.html">Home</a> > <a href="default.html">HW 1</a> > JavaScript Example</p>
+    <h1>Book Order Form</h1>
+    <form>
+        <table>
+            <col width="150" />
+            
+            <tr>
+                <th>Select Books and/or Supply Book title and price</th>
+                <td>
+                <select id="bookList" multiple>
+                    <option value="20">Walden Pond</option>
+                    <option value="15">Zen and the Art...</option>
+                    <option value="8">The Razor's Edge</option>
+                    <option value="15">The Poisonwood Bible</option>
+                    <option value="10">Wuthering Heights</option>
+                </select>
+                </td>
+            </tr>
+            <tr>
+                <th></th><td>Book <input id="book" type="text" /> Price <input id="price" type="text"</td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <th>Options</th>
+                <td><input type="checkbox" name="options" value="rush" />Rush Order <input type="checkbox" name="options" value="gift" />Gift Wrap</td>
+            </tr>
+            <tr>
+                <th>Customer Type</th>
+                <td><input type="radio" name="customer" value="General" checked /> General <input type="radio" name="customer" value="Government" /> Government</td>
+            </tr>
+            <tr>
+                <th>Ship To</th>
+                <td>
+                    <select id="shipping">
+                        <option value="5.00">NY</option>
+                        <option value="7.00">CA</option>
+                        <option value="3.00">SC</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th></th><td>Purchase Details:</td>
+            </tr>
+            <tr>
+                <th><input id="btnPurchase" type="button" value="Purchase" /></th>
+                <td><textarea id="details" cols="55" rows="8"></textarea></td>
+            </tr>
+        </table>
+    </form>
+    <script>
+        $(document).ready(function () {
+            $("#btnPurchase").click(function() {
+                var bookTitles = [];
+                var bookPrices = [];
+                var subTotal = 0.0;
+                var discount;
+                $("#bookList option:selected").each(function(){
+                    bookTitles.push($(this).text());
+                    bookPrices.push(parseFloat($(this).val()));
+                    subTotal += parseFloat($(this).val());
+                })
+                var userBook = $("#book").val();
+                var userPrice = $("#price").val();
+                if ((userBook.length > 0) && (userPrice.length > 0)) {
+                    price = parseFloat(userPrice);
+                    bookTitles.push(userBook);
+                    bookPrices.push(price);
+                    subTotal += price;
+                }
+                var options = [];
+                $("input[name='options']:checked").each(function(){
+                    var name;
+                    var price;
+                    if($(this).val() == "rush"){
+                        name = "Rush Order";
+                        price = 10.00;
+                    }
+                    else{
+                        name = "Gift Wrap";
+                        price = 5.00;
+                    }
+                    subTotal += price;
+                    options.push("$" + price + ".00 - " + name + "\n");
+                })
+                var customer = $("input[name='customer']:checked").val();
+                if(customer == "Government")
+                    discount = 0.10;
+                else
+                    discount = 0;
+                var shippingPrice = parseFloat($("#shipping option:selected").val());
+                subTotal += shippingPrice;
+                var shippingState = $("#shipping option:selected").text();
+
+                var printout = "";
+                var i;
+                for(i = 0; i < bookTitles.length; i++)
+                {
+                    printout += "$" + bookPrices[i].toFixed(2) + " - " + bookTitles[i] + '\n';
+                }
+                printout += customer + " Customer \n";
+                for(i = 0; i < options.length; i++)
+                {
+                    printout += options[i]; 
+                }
+                printout += "$" + shippingPrice.toFixed(2) + " - Ship to " + shippingState + "\n--------------------\n";
+                printout += "Sub Total: $" + subTotal.toFixed(2) + "\n"
+                printout += "Discount (" + (discount*100) + "%): $" + (subTotal * discount).toFixed(2) + "\n";
+                printout += "Total: $" + (subTotal - (subTotal * discount)).toFixed(2);
+                $("#details").text(printout);
+            })
+        })
+    </script>
+</body>
+</html>
