@@ -39,9 +39,9 @@
         <asp:DropDownList ID="ddlSeats" runat="server">
         </asp:DropDownList>
 &nbsp;<asp:RequiredFieldValidator ID="SeatNumValidator" runat="server" ControlToValidate="ddlSeats" ErrorMessage="Must specify seat number" ForeColor="Red" ValidationGroup="Purchase">*</asp:RequiredFieldValidator>
-&nbsp;<asp:Button ID="btnPurchase" runat="server" Text="Purchase" Enabled="False" ValidationGroup="Purchase" />
+&nbsp;<asp:Button ID="btnPurchase" runat="server" Text="Purchase" ValidationGroup="Purchase" OnClick="btnPurchase_Click" />
 &nbsp;
-        <asp:Button ID="btnSummary" runat="server" Text="Event Summary" Enabled="False" />
+        <asp:Button ID="btnSummary" runat="server" Text="Event Summary" OnClick="btnSummary_Click" />
 
         <asp:ValidationSummary ID="ValidationSummary2" runat="server" ForeColor="Red" ValidationGroup="Purchase" />
 
