@@ -28,7 +28,7 @@
             <asp:Button ID="btnRemove" runat="server" Text="Remove" OnClick="btnRemove_Click" />
         </p>
         <p>
-            <asp:TextBox ID="txtSummary" runat="server" Height="250px" Width="500px"></asp:TextBox>
+            <asp:TextBox ID="txtSummary" runat="server" Height="250px" Width="500px" TextMode="MultiLine"></asp:TextBox>
         </p>
     </div>
     </form>

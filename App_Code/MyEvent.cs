@@ -68,4 +68,9 @@ public class MyEvent
         get { return tickets; }
         set { tickets = value; }
     }
+
+    public int NumTickets
+    {
+        get { return tickets.Count; }
+    }
 }
