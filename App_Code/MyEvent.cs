@@ -26,10 +26,14 @@ public class MyEvent
 
     }
 
-    public void Purchase(String name, int age, int seatNum)
+    public bool Purchase(String name, int age, int seatNum)
     {
-        availSeats.Remove(seatNum);
+        if (!availSeats.Remove(seatNum))
+        {
+            return false;
+        }
         tickets.Add(new Seat(name, age, seatNum));
+        return true;
     }
 
     public void Refund(String buyer)

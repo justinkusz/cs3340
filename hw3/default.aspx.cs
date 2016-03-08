@@ -37,7 +37,12 @@ public partial class _default : System.Web.UI.Page
         String buyerName = txtBuyerName.Text;
         int buyerAge = Convert.ToInt16(txtBuyerAge.Text);
         int seatNum = Convert.ToInt16(ddlSeats.SelectedValue);
-        newEvent.Purchase(buyerName, buyerAge, seatNum);
+        if (!newEvent.Purchase(buyerName, buyerAge, seatNum))
+        {
+            SeatNumValidator.ErrorMessage = "Seat not available";
+            SeatNumValidator.IsValid = false;
+            return;
+        }
         lblAvailTickets.Text = newEvent.NumAvailSeats.ToString();
         Session["Event"] = newEvent;
         ddlSeats.DataSource = newEvent.AvailSeats;

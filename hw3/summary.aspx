@@ -14,13 +14,13 @@
         </h2>
         <p>
             <asp:Button ID="btnSellMore" runat="server" Text="Sell More Tickets" OnClick="btnSellMore_Click" />
-&nbsp; Sort:&nbsp;
-            <asp:RadioButton ID="rdbPurchased" runat="server" Text="Order Purchased" />
+&nbsp; Sort:<asp:RadioButtonList ID="rblSort" runat="server" RepeatDirection="Horizontal" AutoPostBack="True" OnSelectedIndexChanged="rblSort_SelectedIndexChanged" RepeatLayout="Flow">
+                <asp:ListItem Selected="True" Value="purchase">Order Purchased</asp:ListItem>
+                <asp:ListItem Value="name">Name</asp:ListItem>
+                <asp:ListItem Value="number">Seat</asp:ListItem>
+            </asp:RadioButtonList>
 &nbsp;
-            <asp:RadioButton ID="rdbName" runat="server" Text="Name" />
-&nbsp;
-            <asp:RadioButton ID="rdbSeat" runat="server" Text="Seat" />
-        </p>
+            </p>
         <p>Remove Ticket Holder&nbsp;
             <asp:DropDownList ID="ddlBuyer" runat="server" >
             </asp:DropDownList>
