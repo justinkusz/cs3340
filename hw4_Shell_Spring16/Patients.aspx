@@ -13,7 +13,7 @@
     </style>
 </head>
 <body>
-    <h2><a href="Default.aspx">HW 4</a> - <a href="http://mypages.valdosta.edu/dgibson/courses/cs3340/Schedule.shtm">Dave Gibson</a></h2>
+    <h2><a href="Default.aspx">HW 4</a> - <a href="../default.html">Justin Kusz</a></h2>
     <form id="form1" runat="server">
     <div>
     

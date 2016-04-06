@@ -48,7 +48,7 @@ public partial class _Default : System.Web.UI.Page
                 int year = Convert.ToInt32(dr.GetValue(4));
                 properties.Add(new Property(listPrice, sqFeet, beds, baths, year));
             }
-            
+
             cmd.Connection.Close();
 
             return properties;
@@ -98,6 +98,7 @@ public partial class _Default : System.Web.UI.Page
         int beds;
         int baths;
         int year;
+        double perFoot;
         // Loop over props and display each one.
         foreach (Property prop in props)
         {
@@ -106,7 +107,8 @@ public partial class _Default : System.Web.UI.Page
             beds = prop.Beds;
             baths = prop.Baths;
             year = prop.Year;
-            summary += String.Format("{0,-15} {1,5} {2,4} {3,7}", price.ToString("C"), feet, beds, baths, year) + System.Environment.NewLine;
+            perFoot = price / feet;
+            summary += String.Format("{0,-15} {1,-7} {2,-7} {3,-7} {4, -7} {5, -7}", price.ToString("C"), feet, beds, baths, year, perFoot.ToString("C")) + System.Environment.NewLine;
         }
         txtProperties.Text = summary;
     }
@@ -115,4 +117,5 @@ public partial class _Default : System.Web.UI.Page
         // Implement this if you can. It will require some changes to the code above and
         // some refactoring.
     }
+
 }

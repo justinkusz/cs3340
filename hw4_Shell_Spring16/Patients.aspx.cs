@@ -24,19 +24,52 @@ public partial class Patients : System.Web.UI.Page
     {
         // Build parameterized insert statement
         //    See: https://lucius.valdosta.edu/dgibson/db1/default.aspx, Database Programming Primer notes, page 6, item 14.
-
+        cmd.CommandText = "Insert Into Patients ( LastName, FirstName, Address ) " + "Values ( @LastName, @FirstName, @Address )";
+        cmd.Parameters.Clear();
+        IDbDataParameter param = cmd.CreateParameter();
+        param.ParameterName = "@LastName";
+        param.Value = txtAddLName.Text;
+        cmd.Parameters.Add(param);
+        param = cmd.CreateParameter();
+        param.ParameterName = "@FirstName";
+        param.Value = txtAddFName.Text;
+        cmd.Parameters.Add(param);
+        param = cmd.CreateParameter();
+        param.ParameterName = "@Address";
+        param.Value = txtAddAddress.Text;
+        cmd.Parameters.Add(param);
     }
 
     private void BuildDeletePatientCommand(IDbCommand cmd)
     {
         // Build parameterized insert statement
         //    See: https://lucius.valdosta.edu/dgibson/db1/default.aspx, Database Programming Primer notes, page 6, item 14.
+        cmd.CommandText = "DELETE FROM Patients WHERE PatientID=@PatientID";
+        cmd.Parameters.Clear();
+        IDbDataParameter param = cmd.CreateParameter();
+        param.ParameterName = "@PatientID";
+        param.Value = txtDelID.Text;
+        cmd.Parameters.Add(param);
     }
 
     private void BuildUpdatePatientCommand(IDbCommand cmd)
     {
         // Build parameterized delete statement
         //    See: https://lucius.valdosta.edu/dgibson/db1/default.aspx, Database Programming Primer notes, page 6, item 14.
+        cmd.CommandText = "UPDATE Patients SET LastName=@LastName, FirstName=@FirstName, Address=@Address WHERE PatientID=@PatientID";
+        cmd.Parameters.Clear();
+        IDbDataParameter param = cmd.CreateParameter();
+        param.ParameterName = "@LastName";
+        param.Value = txtUpdLName.Text;
+        cmd.Parameters.Add(param);
+        param.ParameterName = "@FirstName";
+        param.Value = txtUpdFName.Text;
+        cmd.Parameters.Add(param);
+        param.ParameterName = "@Address";
+        param.Value = txtUpdAddress.Text;
+        cmd.Parameters.Add(param);
+        param.ParameterName = "@PatientID";
+        param.Value = txtUpdID.Text;
     }
 
     //----------------------------------------------
