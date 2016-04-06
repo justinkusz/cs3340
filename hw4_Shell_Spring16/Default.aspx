@@ -55,8 +55,8 @@
                     </asp:RadioButtonList>
                 </p>
                 <p>
-                    All Properties<br /> <span class="auto-style2">Price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sq.Feet&nbsp; Beds&nbsp; Baths&nbsp; Year Built&nbsp; $/Sq.Foot</span><br class="auto-style2" />
-                    <asp:TextBox ID="txtProperties" runat="server" Height="232px" TextMode="MultiLine" Width="370px"></asp:TextBox>
+                    All Properties<br /> <span class="auto-style2">Price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sq.Feet&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Beds&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Baths&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Year Built&nbsp; $/Sq.Foot</span><br class="auto-style2" />
+                    <asp:TextBox ID="txtProperties" runat="server" Height="229px" TextMode="MultiLine" Width="499px"></asp:TextBox>
                     <br />
                     <br />
                     Debug Info<br />

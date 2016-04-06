@@ -13,13 +13,13 @@
     
     public class Property
     {
-        private int listPrice;
-        private int sqFeet;
+        private double listPrice;
+        private double sqFeet;
         private int beds;
         private int baths;
         private int year;
 
-        public Property(int listPrice, int sqFeet, int beds, int baths, int year)
+        public Property(double listPrice, double sqFeet, int beds, int baths, int year)
         {
             this.listPrice = listPrice;
             this.sqFeet = sqFeet;
@@ -28,11 +28,11 @@
             this.year = year;
         }
 
-        public int ListPrice
+        public double ListPrice
         {
             get { return listPrice; }
         }
-        public int SqFeet
+        public double SqFeet
         {
             get { return sqFeet; }
         }

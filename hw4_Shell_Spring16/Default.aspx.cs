@@ -10,12 +10,12 @@ using System.Web.UI.WebControls;
 public partial class _Default : System.Web.UI.Page
 {
     // Set database type. If working on campus use:
-    //string dbType = "SQL_Server";
+    string dbType = "SQL_Server";
     // Open App_Code/hw4/ConnectionFactory.cs and examine the GetCommand method.
     // Open Web.config and examine the connectionStrings node.
 
     // If working from home, use:
-    String dbType = "Access_Patients";
+    //String dbType = "Access_Patients";
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -41,11 +41,11 @@ public partial class _Default : System.Web.UI.Page
             IDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                int listPrice = dr.GetInt32(0);
-                int sqFeet = dr.GetInt32(1);
-                int beds = dr.GetInt32(2);
-                int baths = dr.GetInt32(3);
-                int year = dr.GetInt32(4);
+                double listPrice = dr.GetDouble(0);
+                double sqFeet = dr.GetDouble(1);
+                int beds = Convert.ToInt32(dr.GetValue(2));
+                int baths = Convert.ToInt32(dr.GetValue(3));
+                int year = Convert.ToInt32(dr.GetValue(4));
                 properties.Add(new Property(listPrice, sqFeet, beds, baths, year));
             }
             
@@ -86,15 +86,29 @@ public partial class _Default : System.Web.UI.Page
             }
         }
         lblNumProperties.Text = numProperties.ToString();
-        lblAveragePrice.Text = average.ToString();
+        lblAveragePrice.Text = average.ToString("C");
         lblNumAboveAvgPrice.Text = numAboveAverage.ToString();
     }
 
     private void displayProperties(List<Property> props)
     {
+        string summary = "";
+        double price;
+        double feet;
+        int beds;
+        int baths;
+        int year;
         // Loop over props and display each one.
-
-        // txtProperties.Text = ...
+        foreach (Property prop in props)
+        {
+            price = prop.ListPrice;
+            feet = prop.SqFeet;
+            beds = prop.Beds;
+            baths = prop.Baths;
+            year = prop.Year;
+            summary += String.Format("{0,-15} {1,5} {2,4} {3,7}", price.ToString("C"), feet, beds, baths, year) + System.Environment.NewLine;
+        }
+        txtProperties.Text = summary;
     }
     protected void rblSortType_SelectedIndexChanged(object sender, EventArgs e)
     {
