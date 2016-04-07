@@ -50,8 +50,8 @@
                 </p>
                 <p>
                     Sort:<asp:RadioButtonList ID="rblSortType" runat="server" AutoPostBack="True" onSelectedindexchanged="rblSortType_SelectedIndexChanged" RepeatDirection="Horizontal" RepeatLayout="Flow">
-                        <asp:ListItem Selected="True">Price</asp:ListItem>
-                        <asp:ListItem>Sq. Feet</asp:ListItem>
+                        <asp:ListItem Selected="True" Value="price">Price</asp:ListItem>
+                        <asp:ListItem Value="feet">Sq. Feet</asp:ListItem>
                     </asp:RadioButtonList>
                 </p>
                 <p>

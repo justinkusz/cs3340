@@ -1,6 +1,4 @@
-﻿namespace hw4
-{
-
+﻿
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -18,6 +16,7 @@
         private int beds;
         private int baths;
         private int year;
+        private double pricePerFoot;
 
         public Property(double listPrice, double sqFeet, int beds, int baths, int year)
         {
@@ -26,6 +25,7 @@
             this.beds = beds;
             this.baths = baths;
             this.year = year;
+            this.pricePerFoot = listPrice / sqFeet;
         }
 
         public double ListPrice
@@ -48,5 +48,9 @@
         {
             get { return year; }
         }
+
+        public double PricePerFoot
+        {
+            get { return pricePerFoot; }
+        }
     }
-}

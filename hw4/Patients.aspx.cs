@@ -1,5 +1,4 @@
-﻿using hw4;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -10,9 +9,9 @@ using System.Web.UI.WebControls;
 public partial class Patients : System.Web.UI.Page
 {
     // Set database type. If working on campus use:
-    string dbType = "SQL_Server";
+    //string dbType = "SQL_Server";
 
-    //string dbType = "Access_Patients";
+    string dbType = "Access_Patients";
 
     //----------------------------------------------
     // You will write the three methods below.
@@ -56,20 +55,24 @@ public partial class Patients : System.Web.UI.Page
     {
         // Build parameterized delete statement
         //    See: https://lucius.valdosta.edu/dgibson/db1/default.aspx, Database Programming Primer notes, page 6, item 14.
-        cmd.CommandText = "UPDATE Patients SET LastName=@LastName, FirstName=@FirstName, Address=@Address WHERE PatientID=@PatientID";
+        cmd.CommandText = "UPDATE Patients SET LastName = @LastName, FirstName = @FirstName, Address = @Address WHERE PatientID=@PatientID";
         cmd.Parameters.Clear();
         IDbDataParameter param = cmd.CreateParameter();
         param.ParameterName = "@LastName";
         param.Value = txtUpdLName.Text;
         cmd.Parameters.Add(param);
+        param = cmd.CreateParameter();
         param.ParameterName = "@FirstName";
         param.Value = txtUpdFName.Text;
         cmd.Parameters.Add(param);
+        param = cmd.CreateParameter();
         param.ParameterName = "@Address";
         param.Value = txtUpdAddress.Text;
         cmd.Parameters.Add(param);
+        param = cmd.CreateParameter();
         param.ParameterName = "@PatientID";
         param.Value = txtUpdID.Text;
+        cmd.Parameters.Add(param);
     }
 
     //----------------------------------------------
