@@ -9,12 +9,12 @@ using System.Web.UI.WebControls;
 public partial class _Default : System.Web.UI.Page
 {
     // Set database type. If working on campus use:
-    //string dbType = "SQL_Server";
+    string dbType = "SQL_Server";
     // Open App_Code/hw4/ConnectionFactory.cs and examine the GetCommand method.
     // Open Web.config and examine the connectionStrings node.
 
     // If working from home, use:
-    String dbType = "Access_Patients";
+    //String dbType = "Access_Patients";
     String sortBy;
     protected void Page_Load(object sender, EventArgs e)
     {
