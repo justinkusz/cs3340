@@ -79,6 +79,17 @@
                 <p style="font-weight: 700">Prescriptions -
                     <asp:Label ID="lblSelectedVisit" runat="server" ForeColor="Red"></asp:Label>
         </p>
+                <p style="font-weight: 700">
+                    <asp:GridView ID="gvPrescriptions" runat="server">
+                    </asp:GridView>
+        </p>
+                <p style="font-weight: 700">
+                    <asp:Button ID="btnAddPrescription" runat="server" Text="Add Prescription" />
+&nbsp; Drug Name
+                    <asp:TextBox ID="txtDrugName" runat="server"></asp:TextBox>
+&nbsp; Instructions
+                    <asp:TextBox ID="txtInstructions" runat="server"></asp:TextBox>
+        </p>
         
     </div>
     </form>
