@@ -11,4 +11,14 @@ public partial class hw5_Default : System.Web.UI.Page
     {
 
     }
+    protected void gvPatients_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        string last = gvPatients.SelectedRow.Cells[2].Text;
+        string first = gvPatients.SelectedRow.Cells[3].Text;
+        lblSelectedPatient.Text = last + ", " + first;
+    }
+    protected void btnAddPatient_Click(object sender, EventArgs e)
+    {
+
+    }
 }
