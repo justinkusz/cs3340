@@ -5,6 +5,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>HW 5 - Justin Kusz</title>
+    <script type="text/javascript">
+        function ConfirmDelete() 
+        {
+            return confirm("Are you sure you want to delete this entry?");
+        }
+    </script>
 </head>
 <body>
     <h2>HW 5 - <a href="../default.html">Justin Kusz</a></h2>
@@ -15,7 +21,12 @@
 
         <h3>Patients<asp:GridView ID="gvPatients" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="PatientID" DataSourceID="SqlDbPatients" OnSelectedIndexChanged="gvPatients_SelectedIndexChanged">
             <Columns>
-                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" ShowSelectButton="True" />
+                <asp:CommandField ShowEditButton="True" ShowSelectButton="True" />
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:LinkButton ID="gvPatientsDelButton" runat="server" CommandName="Delete" OnClientClick="return ConfirmDelete()">Delete</asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:BoundField DataField="PatientID" HeaderText="PatientID" InsertVisible="False" ReadOnly="True" SortExpression="PatientID" />
                 <asp:BoundField DataField="LastName" HeaderText="LastName" SortExpression="LastName" />
                 <asp:BoundField DataField="FirstName" HeaderText="FirstName" SortExpression="FirstName" />
