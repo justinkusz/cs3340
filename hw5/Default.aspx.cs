@@ -17,7 +17,10 @@ public partial class hw5_Default : System.Web.UI.Page
     //String dbType = "Access_Patients"; 
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (Page.IsPostBack)
+        {
+            
+        }
     }
     protected void gvPatients_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -29,7 +32,25 @@ public partial class hw5_Default : System.Web.UI.Page
     }
     protected void btnAddPatient_Click(object sender, EventArgs e)
     {
+        string lastName = txtLastName.Text;
+        string firstName = txtFirstName.Text;
+        string address = txtAddress.Text;
+        try
+        {
+            // 1. Read data required Patient data from database
+            //    See: https://lucius.valdosta.edu/dgibson/db1/default.aspx, Database Programming Primer notes, page 5, item 12.
+            //    Parameter for GetCommand method should be "dbType";
+            dsSqlPatients.InsertParameters["LastName"].DefaultValue = lastName;
+            dsSqlPatients.InsertParameters["FirstName"].DefaultValue = firstName;
+            dsSqlPatients.InsertParameters["Address"].DefaultValue = address;
+            dsSqlPatients.Insert();
+        }
+        catch (Exception ex)
+        {
 
+        }
+        gvPatients.DataBind();
+        clearInputFields();
     }
 
     private double getTotalCharges(string dbType, string patientId)
@@ -65,7 +86,8 @@ public partial class hw5_Default : System.Web.UI.Page
         return result;
     }
 
-    private bool hasVisits(string dbType, string patientId)
+    
+    public bool hasVisits(string patientId)
     {
         bool result = true;
         try
@@ -99,5 +121,57 @@ public partial class hw5_Default : System.Web.UI.Page
 
         }
         return result;
+    }
+    protected void btnAddVisit_Click(object sender, EventArgs e)
+    {
+        string visitDate = txtDate.Text;
+        string charge = txtCharge.Text;
+        string notes = txtNotes.Text;
+
+        try
+        {
+            // 1. Read data required Patient data from database
+            //    See: https://lucius.valdosta.edu/dgibson/db1/default.aspx, Database Programming Primer notes, page 5, item 12.
+            //    Parameter for GetCommand method should be "dbType";
+            dsSqlVisits.InsertParameters["PatientID"].DefaultValue = gvPatients.SelectedRow.Cells[2].Text;
+            dsSqlVisits.InsertParameters["VisitDate"].DefaultValue = visitDate;
+            dsSqlVisits.InsertParameters["Charge"].DefaultValue = charge;
+            dsSqlVisits.InsertParameters["Notes"].DefaultValue = notes;
+            dsSqlVisits.Insert();
+        }
+        catch (Exception ex)
+        {
+
+        }
+        gvPatients.DataBind();
+        clearInputFields();
+
+        updateCharges();
+    }
+
+    private void updateCharges()
+    {
+        string patientId = gvPatients.SelectedRow.Cells[2].Text;
+        lblTotalCharges.Text = getTotalCharges(dbType, patientId).ToString("C");
+    }
+    private void clearInputFields()
+    {
+        txtAddress.Text = "";
+        txtCharge.Text = "";
+        txtDate.Text = "";
+        txtDrugName.Text = "";
+        txtFirstName.Text = "";
+        txtInstructions.Text = "";
+        txtLastName.Text = "";
+        txtNotes.Text = "";
+    }
+    protected void gvVisits_RowDeleted(object sender, GridViewDeletedEventArgs e)
+    {
+        DataBind();
+        updateCharges();
+    }
+    protected void gvVisits_RowUpdated(object sender, GridViewUpdatedEventArgs e)
+    {
+        updateCharges();
     }
 }
