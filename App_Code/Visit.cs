@@ -8,9 +8,9 @@ using System.Web;
 /// </summary>
 public class Visit
 {
-    string date;
-    double charge;
-    string notes;
+    private string date;
+    private double charge;
+    private string notes;
 
 	public Visit(string date, double charge, string notes)
 	{

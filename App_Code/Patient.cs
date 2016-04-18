@@ -18,5 +18,18 @@ public class Patient
         this.address = address;
 	}
 
+    public string LastName
+    {
+        get { return lastName; }
+    }
 
+    public string FirstName
+    {
+        get { return firstName; }
+    }
+
+    public string Address
+    {
+        get { return address; }
+    }
 }
