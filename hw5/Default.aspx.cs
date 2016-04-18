@@ -64,4 +64,40 @@ public partial class hw5_Default : System.Web.UI.Page
         }
         return result;
     }
+
+    private bool hasVisits(string dbType, string patientId)
+    {
+        bool result = true;
+        try
+        {
+            // 1. Read data required Patient data from database
+            //    See: https://lucius.valdosta.edu/dgibson/db1/default.aspx, Database Programming Primer notes, page 5, item 12.
+            //    Parameter for GetCommand method should be "dbType";
+            IDbCommand cmd = ConnectionFactory.GetCommand(dbType);
+            cmd.CommandText = "SELECT COUNT(*) FROM [Visits] WHERE ([PatientID] = @PatientID)";
+            IDbDataParameter param = cmd.CreateParameter();
+            param.ParameterName = "@PatientID";
+            param.Value = patientId;
+            cmd.Parameters.Add(param);
+            cmd.Connection.Open();
+            IDataReader dr = cmd.ExecuteReader();
+            int count = 0;
+            while (dr.Read())
+            {
+                count = Convert.ToInt32(dr.GetValue(0));
+            }
+
+            cmd.Connection.Close();
+
+            if (count > 0)
+                result = true;
+            else
+                result = false;
+        }
+        catch (Exception ex)
+        {
+
+        }
+        return result;
+    }
 }
