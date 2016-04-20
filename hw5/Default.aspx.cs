@@ -14,7 +14,7 @@ public partial class hw5_Default : System.Web.UI.Page
     // Open Web.config and examine the connectionStrings node.
 
     // If working from home, use:
-    //String dbType = "Access_Patients"; 
+    //String dbType = "Access_Patients";
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Page.IsPostBack)
@@ -29,6 +29,7 @@ public partial class hw5_Default : System.Web.UI.Page
         string patientId = gvPatients.SelectedRow.Cells[2].Text;
         lblSelectedPatient.Text = last + ", " + first;
         lblTotalCharges.Text = getTotalCharges(dbType, patientId).ToString("C");
+        lblSelectedVisit.Text = "";
     }
     protected void btnAddPatient_Click(object sender, EventArgs e)
     {
@@ -122,6 +123,43 @@ public partial class hw5_Default : System.Web.UI.Page
         }
         return result;
     }
+
+    public bool hasPrescriptions(string visitId)
+    {
+        bool result = true;
+        try
+        {
+            // 1. Read data required Patient data from database
+            //    See: https://lucius.valdosta.edu/dgibson/db1/default.aspx, Database Programming Primer notes, page 5, item 12.
+            //    Parameter for GetCommand method should be "dbType";
+            IDbCommand cmd = ConnectionFactory.GetCommand(dbType);
+            cmd.CommandText = "SELECT COUNT(*) FROM [Prescriptions] WHERE ([VisitID] = @VisitID)";
+            IDbDataParameter param = cmd.CreateParameter();
+            param.ParameterName = "@VisitID";
+            param.Value = visitId;
+            cmd.Parameters.Add(param);
+            cmd.Connection.Open();
+            IDataReader dr = cmd.ExecuteReader();
+            int count = 0;
+            while (dr.Read())
+            {
+                count = Convert.ToInt32(dr.GetValue(0));
+            }
+
+            cmd.Connection.Close();
+
+            if (count > 0)
+                result = true;
+            else
+                result = false;
+        }
+        catch (Exception ex)
+        {
+
+        }
+        return result;
+    }
+
     protected void btnAddVisit_Click(object sender, EventArgs e)
     {
         string visitDate = txtDate.Text;
@@ -173,5 +211,36 @@ public partial class hw5_Default : System.Web.UI.Page
     protected void gvVisits_RowUpdated(object sender, GridViewUpdatedEventArgs e)
     {
         updateCharges();
+    }
+    protected void gvVisits_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        lblSelectedVisit.Text = gvVisits.SelectedRow.Cells[4].Text;
+    }
+    protected void btnAddPrescription_Click(object sender, EventArgs e)
+    {
+        string drugName = txtDrugName.Text;
+        string instructions = txtInstructions.Text;
+
+        try
+        {
+            // 1. Read data required Patient data from database
+            //    See: https://lucius.valdosta.edu/dgibson/db1/default.aspx, Database Programming Primer notes, page 5, item 12.
+            //    Parameter for GetCommand method should be "dbType";
+            dsSqlPrescriptions.InsertParameters["PatientID"].DefaultValue = gvPatients.SelectedRow.Cells[2].Text;
+            dsSqlPrescriptions.InsertParameters["VisitID"].DefaultValue = gvVisits.SelectedRow.Cells[2].Text;
+            dsSqlPrescriptions.InsertParameters["DrugName"].DefaultValue = drugName;
+            dsSqlPrescriptions.InsertParameters["Instructions"].DefaultValue = instructions;
+            dsSqlPrescriptions.Insert();
+        }
+        catch (Exception ex)
+        {
+
+        }
+        DataBind();
+        clearInputFields();
+    }
+    protected void gvPrescriptions_RowDeleted(object sender, GridViewDeletedEventArgs e)
+    {
+        gvVisits.DataBind();
     }
 }

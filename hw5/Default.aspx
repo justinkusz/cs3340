@@ -81,7 +81,7 @@
                     <asp:Parameter Name="VisitID" Type="Int32" />
                 </UpdateParameters>
             </asp:SqlDataSource>
-            <asp:SqlDataSource ID="dsSqlPrescriptions" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringSqlServer %>" DeleteCommand="DELETE FROM [Prescriptions] WHERE [PrescriptionID] = @PrescriptionID" InsertCommand="INSERT INTO [Prescriptions] ([PatientID], [VisitID], [DrugName], [Instructions]) VALUES (@PatientID, @VisitID, @DrugName, @Instructions)" SelectCommand="SELECT [PrescriptionID], [PatientID], [VisitID], [DrugName], [Instructions] FROM [Prescriptions]" UpdateCommand="UPDATE [Prescriptions] SET [PatientID] = @PatientID, [VisitID] = @VisitID, [DrugName] = @DrugName, [Instructions] = @Instructions WHERE [PrescriptionID] = @PrescriptionID">
+            <asp:SqlDataSource ID="dsSqlPrescriptions" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringSqlServer %>" DeleteCommand="DELETE FROM [Prescriptions] WHERE [PrescriptionID] = @PrescriptionID" InsertCommand="INSERT INTO [Prescriptions] ([PatientID], [VisitID], [DrugName], [Instructions]) VALUES (@PatientID, @VisitID, @DrugName, @Instructions)" SelectCommand="SELECT [PrescriptionID], [PatientID], [VisitID], [DrugName], [Instructions] FROM [Prescriptions] WHERE (([PatientID] = @PatientID) AND ([VisitID] = @VisitID))" UpdateCommand="UPDATE [Prescriptions] SET [PatientID] = @PatientID, [VisitID] = @VisitID, [DrugName] = @DrugName, [Instructions] = @Instructions WHERE [PrescriptionID] = @PrescriptionID">
                 <DeleteParameters>
                     <asp:Parameter Name="PrescriptionID" Type="Int32" />
                 </DeleteParameters>
@@ -91,6 +91,10 @@
                     <asp:Parameter Name="DrugName" Type="String" />
                     <asp:Parameter Name="Instructions" Type="String" />
                 </InsertParameters>
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="gvPatients" Name="PatientID" PropertyName="SelectedValue" Type="Int32" />
+                    <asp:ControlParameter ControlID="gvVisits" Name="VisitID" PropertyName="SelectedValue" Type="Int32" />
+                </SelectParameters>
                 <UpdateParameters>
                     <asp:Parameter Name="PatientID" Type="Int32" />
                     <asp:Parameter Name="VisitID" Type="Int32" />
@@ -116,10 +120,15 @@
             <asp:Label ID="lblSelectedPatient" runat="server" ForeColor="Red"></asp:Label>
         </p>
                 <p style="font-weight: 700">
-                    <asp:GridView ID="gvVisits" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="VisitID" DataSourceID="dsSqlVisits" OnRowDeleted="gvVisits_RowDeleted" CellPadding="4" ForeColor="#333333" GridLines="None" OnRowUpdated="gvVisits_RowUpdated">
+                    <asp:GridView ID="gvVisits" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="VisitID" DataSourceID="dsSqlVisits" OnRowDeleted="gvVisits_RowDeleted" CellPadding="4" ForeColor="#333333" GridLines="None" OnRowUpdated="gvVisits_RowUpdated" OnSelectedIndexChanged="gvVisits_SelectedIndexChanged">
                         <AlternatingRowStyle BackColor="White" />
                         <Columns>
-                            <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" ShowSelectButton="True" />
+                            <asp:CommandField ShowEditButton="True" ShowSelectButton="True" />
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="gvVisitsLnkBtnDelete" runat="server" CommandName="Delete" Visible='<%# !hasPrescriptions(Convert.ToString(Eval("VisitID"))) %>' OnClientClick="return ConfirmDelete();">Delete</asp:LinkButton>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:BoundField DataField="VisitID" HeaderText="VisitID" InsertVisible="False" ReadOnly="True" SortExpression="VisitID" />
                             <asp:BoundField DataField="PatientID" HeaderText="PatientID" SortExpression="PatientID" Visible="False" />
                             <asp:BoundField DataField="VisitDate" HeaderText="VisitDate" SortExpression="VisitDate" />
@@ -151,7 +160,8 @@
                     <asp:Label ID="lblSelectedVisit" runat="server" ForeColor="Red"></asp:Label>
         </p>
                 <p style="font-weight: 700">
-                    <asp:GridView ID="gvPrescriptions" runat="server" AutoGenerateColumns="False" DataKeyNames="PrescriptionID" DataSourceID="dsSqlPrescriptions">
+                    <asp:GridView ID="gvPrescriptions" runat="server" AutoGenerateColumns="False" DataKeyNames="PrescriptionID" DataSourceID="dsSqlPrescriptions" CellPadding="4" ForeColor="#333333" GridLines="None" OnRowDeleted="gvPrescriptions_RowDeleted">
+                        <AlternatingRowStyle BackColor="White" />
                         <Columns>
                             <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
                             <asp:BoundField DataField="PrescriptionID" HeaderText="PrescriptionID" InsertVisible="False" ReadOnly="True" SortExpression="PrescriptionID" />
@@ -160,10 +170,20 @@
                             <asp:BoundField DataField="DrugName" HeaderText="DrugName" SortExpression="DrugName" />
                             <asp:BoundField DataField="Instructions" HeaderText="Instructions" SortExpression="Instructions" />
                         </Columns>
+                        <EditRowStyle BackColor="#2461BF" />
+                        <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                        <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                        <RowStyle BackColor="#EFF3FB" />
+                        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                        <SortedAscendingCellStyle BackColor="#F5F7FB" />
+                        <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+                        <SortedDescendingCellStyle BackColor="#E9EBEF" />
+                        <SortedDescendingHeaderStyle BackColor="#4870BE" />
                     </asp:GridView>
         </p>
                 <p style="font-weight: 700">
-                    <asp:Button ID="btnAddPrescription" runat="server" Text="Add Prescription" />
+                    <asp:Button ID="btnAddPrescription" runat="server" Text="Add Prescription" OnClick="btnAddPrescription_Click" />
 &nbsp; Drug Name
                     <asp:TextBox ID="txtDrugName" runat="server"></asp:TextBox>
 &nbsp; Instructions
