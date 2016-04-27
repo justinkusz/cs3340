@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="6f015794-3392-47c5-b0a5-17fceb2e1e91" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:14221/DataParserService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="DataParserService.xsd" MetadataType="Schema" ID="15a88510-1641-44ed-bb10-0062225517a8" SourceId="1" SourceUrl="http://localhost:14221/DataParserService.svc?xsd=xsd0" />
+    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="0008ccd3-904e-400c-b239-f6b0fdbefa3c" SourceId="1" SourceUrl="http://localhost:14221/DataParserService.svc?wsdl" />
+    <MetadataFile FileName="DataParserService1.xsd" MetadataType="Schema" ID="654f90ca-b400-4f21-831c-1ff853701796" SourceId="1" SourceUrl="http://localhost:14221/DataParserService.svc?xsd=xsd1" />
+    <MetadataFile FileName="DataParserService.disco" MetadataType="Disco" ID="8504a0a8-9e1a-488e-ba93-ca31e35fd000" SourceId="1" SourceUrl="http://localhost:14221/DataParserService.svc?disco" />
+    <MetadataFile FileName="DataParserService2.xsd" MetadataType="Schema" ID="e4f04d98-8560-4442-b811-b9a32ca63fc4" SourceId="1" SourceUrl="http://localhost:14221/DataParserService.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
