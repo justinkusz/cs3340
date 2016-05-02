@@ -71,7 +71,7 @@
     <Compile Include="DataParserService.svc.cs">
       <DependentUpon>DataParserService.svc</DependentUpon>
     </Compile>
-    <Compile Include="DataParserService.cs" />
+    <Compile Include="IDataParserService.cs" />
     <Compile Include="DescStatsService.svc.cs">
       <DependentUpon>DescStatsService.svc</DependentUpon>
     </Compile>

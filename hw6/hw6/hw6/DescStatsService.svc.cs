@@ -13,9 +13,24 @@ namespace hw6
     {
         public DescriptiveStatistics GetDescStats(double[] input)
         {
-            DescriptiveStatistics output = new DescriptiveStatistics();
+            int size = input.Length;
+            double average = 0.0;
 
-            return output;
+            for (int i = 0; i < input.Length; i++)
+            {
+                average += input[i];
+            }
+
+            average = average / size;
+
+            double stDeviation = 0.0;
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                stDeviation += Math.Pow(input[i], 2.0);
+            }
+            stDeviation = Math.Sqrt(stDeviation / (size - 1));
+            return new DescriptiveStatistics(size, average, stDeviation);
         }
     }
 }

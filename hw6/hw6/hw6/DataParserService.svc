@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="hw6.Service1" CodeBehind="DataParserService.svc.cs" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="hw6.DataParserService" CodeBehind="DataParserService.svc.cs" %>

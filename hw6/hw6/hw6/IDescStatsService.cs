@@ -20,5 +20,25 @@ namespace hw6
         int sampleSize;
         double average;
         double stDeviation;
+
+        public DescriptiveStatistics(int sampleSize, double average, double stDeviation)
+        {
+            this.sampleSize = sampleSize;
+            this.average = average;
+            this.stDeviation = stDeviation;
+        }
+
+        public int Size
+        {
+            get { return sampleSize; }
+        }
+        public double Average
+        {
+            get { return average; }
+        }
+        public double StDev
+        {
+            get { return stDeviation; }
+        }
     }
 }

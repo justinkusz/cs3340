@@ -13,7 +13,7 @@ namespace hw6
     {
         public ConfidenceInterval GetCI(double[] input)
         {
-            ConfidenceInterval result = new ConfidenceInterval();
+            ConfidenceInterval result = new ConfidenceInterval(input);
 
             return result;
         }

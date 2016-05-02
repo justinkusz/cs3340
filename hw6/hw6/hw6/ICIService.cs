@@ -20,5 +20,13 @@ namespace hw6
     {
         double LCL;
         double UCL;
+
+        public ConfidenceInterval(double[] input)
+        {
+            DescStatsService service = new DescStatsService();
+            DescriptiveStatistics stats =  service.GetDescStats(input);
+            this.LCL = stats.Average - (1.96 * (stats.StDev / Math.Sqrt(stats.Size)));
+            this.UCL = stats.Average + (1.96 * (stats.StDev / Math.Sqrt(stats.Size)));
+        }
     }
 }
