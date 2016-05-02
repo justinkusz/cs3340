@@ -13,5 +13,14 @@ namespace hw6_app
         {
 
         }
+
+        protected void btnCalculate_Click(object sender, EventArgs e)
+        {
+            string inputData = txtInputData.Text;
+
+            ServiceReference1.DataParserService service = new ServiceReference1.DataParserServiceClient();
+            double [] numberSet = service.ParseData(inputData);
+            
+        }
     }
 }
